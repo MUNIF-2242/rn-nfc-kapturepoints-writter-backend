@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { uploadNid } = require("../controllers/uploadController");
+const { uploadLicense } = require("../controllers/uploadController");
 
-router.post("/upload-nid", uploadNid);
+router.post("/upload-license", uploadLicense);
 
 module.exports = router;

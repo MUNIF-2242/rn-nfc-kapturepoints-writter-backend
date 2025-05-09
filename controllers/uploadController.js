@@ -14,7 +14,7 @@ console.log("S3 Client initialized.............");
 console.log(process.env.YOUR_AWS_ACCESS_KEY_ID);
 console.log(process.env.YOUR_AWS_SECRET_ACCESS_KEY);
 
-exports.uploadNid = async (req, res) => {
+exports.uploadLicense = async (req, res) => {
   const { image } = req.body;
 
   if (!image) {

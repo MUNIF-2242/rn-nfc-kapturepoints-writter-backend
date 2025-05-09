@@ -32,7 +32,7 @@ const textractClient = new TextractClient({
   },
 });
 
-app.post("/upload-nid", async (req, res) => {
+app.post("/upload-license", async (req, res) => {
   const { image } = req.body;
 
   if (!image) {

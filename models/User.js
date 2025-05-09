@@ -11,8 +11,8 @@ const userSchema = new mongoose.Schema({
   licenseExpirationDate: { type: String, required: false },
   licenseHolderName: { type: String, required: false },
   licenseIssueDate: { type: String, required: false },
-
   balance: { type: String, required: false },
+  isCardActivated: { type: Boolean, required: true },
 });
 
 module.exports = mongoose.model("User", userSchema);

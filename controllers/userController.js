@@ -8,11 +8,19 @@ exports.createUser = async (req, res) => {
   }
 
   try {
-    const existingUser = await User.findOne({ phoneNumber });
-    if (existingUser) {
+    // Check if the tagId is already associated with an existing user
+    const existingUserWithTag = await User.findOne({ tagId });
+    if (existingUserWithTag) {
+      return res.status(409).json({ error: "Tag ID already in use" });
+    }
+
+    // Check if the phoneNumber already exists
+    const existingUserWithPhoneNumber = await User.findOne({ phoneNumber });
+    if (existingUserWithPhoneNumber) {
       return res.status(409).json({ error: "User already exists" });
     }
 
+    // If no existing user with phoneNumber or tagId, create the new user
     const newUser = new User({ phoneNumber, tagId, isCardActivated });
     await newUser.save();
 

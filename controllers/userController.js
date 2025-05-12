@@ -32,7 +32,7 @@ exports.createUser = async (req, res) => {
 };
 
 exports.getUserByPhoneNumber = async (req, res) => {
-  const { phoneNumber } = req.params;
+  const { phoneNumber } = req.query;
 
   if (!phoneNumber) {
     return res.status(400).json({ error: "Phone number is required" });
@@ -40,6 +40,27 @@ exports.getUserByPhoneNumber = async (req, res) => {
 
   try {
     const user = await User.findOne({ phoneNumber });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.status(200).json({ user });
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+exports.getUserByTagId = async (req, res) => {
+  const { tagId } = req.query;
+
+  if (!tagId) {
+    return res.status(400).json({ error: "Tag id is required" });
+  }
+
+  try {
+    const user = await User.findOne({ tagId });
 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
